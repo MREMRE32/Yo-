@@ -1,0 +1,180 @@
+<Manager>:
+    Menu:
+    Terms:
+
+<Terms>    
+
+<Log>:
+    FloatLayout:
+        Label:
+            text: "Log Into Your Account"
+            pos_hint: {"x": 1.57, "y": 1.8}
+            size_hint_x: .4
+            size_hint_y: .07
+        TextInput:
+            id: LogUser
+            hint_text: "Username"
+            pos_hint: {"x": 1.52, "y": 1.55}
+            size_hint_x: .5
+            size_hint_y: .15
+        TextInput:
+            id: LogPass
+            hint_text: "Password"
+            pos_hint: {"x": 1.52, "y": 1.35}
+            size_hint_x: .5
+            size_hint_y: .15
+        Button:
+            text: "Enter"
+            pos_hint: {"x": 1.52, "y": 1.05}
+            size_hint_x: .5
+            size_hint_y: .2
+            on_release: root.verifyAccount()
+
+<Sign>:
+    FloatLayout:
+        Label:
+            text: "Create An Account"
+            pos_hint: {"x": 1.56, "y": 1.2}
+            size_hint_x: .4
+            size_hint_y: .07
+        TextInput:
+            id: email
+            hint_text: "Email"
+            pos_hint: {"x": 1.46, "y": 1.05}
+            size_hint_x: .6
+            size_hint_y: .09
+
+        TextInput:
+            id: uname
+            hint_text: "Username"
+            pos_hint: {"x": 1.46, "y": 0.9}
+            size_hint_x: .6
+            size_hint_y: .09
+
+        TextInput:
+            id: pass1
+            hint_text: "Password"
+            password: True
+            pos_hint: {"x": 1.46, "y": 0.75}
+            size_hint_x: .6
+            size_hint_y: .09
+
+        TextInput:
+            id: pass2
+            hint_text: "Re-Enter Pass"
+            password: True
+            pos_hint: {"x": 1.46, "y": 0.6}
+            size_hint_x: .6
+            size_hint_y: .09
+
+        Button:
+            text: "Create"
+            pos_hint: {"x": 1.46, "y": 0.4}
+            size_hint_x: .6
+            size_hint_y: .12
+            on_release: root.createAccount()
+
+<P3>:
+    FloatLayout:
+        Label:
+            color: 0,1,0,1
+            text: "Account creation successful"
+            pos_hint: {"x": 1.84, "y": 2}
+            size_hint_x: .4
+            size_hint_y: .07
+
+<P4>:
+    FloatLayout:
+        Label:
+            text: "Account creation denied: Please correct the following errors:"
+            color: 1,0,0,1
+            pos_hint: {"x": 0.73, "y": 2.22}
+            size_hint_x: .4
+            size_hint_y: .07
+
+<P5>:
+    FloatLayout:
+        Label:
+            text: "Login Successful"
+            color: 0,1,0,1
+            pos_hint: {"x": 0.73, "y": 2.22}
+            size_hint_x: .4
+            size_hint_y: .07
+
+<Menu>:
+    name: "LoginSignin"
+    id: main_menu
+    orientation: "vertical"
+    spacing: 10
+    spacex: self.size[0]/3
+    canvas.before:
+        Color:
+            rgba: (.80,.20,.20,60)
+        Rectangle:
+            size: self.size
+            pos:self.pos
+    BoxLayout:
+        size_hint_y: None
+        height: 50
+        Label:
+            text: "Artsy-Fartz"
+            bold: True
+            size_hint_x: 7
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: main_menu.spacex, 10
+        #spacing: 20
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 10
+        size_hint_y: None
+        height: 80
+        Button:
+            text: "Sign Up"
+            multiline: False
+            on_release: root.btn2()
+        Button:
+            id: log_in
+            text: "Log In"
+            multiline: False
+            on_release: root.btn()
+    Label:
+        id: sp
+        size_hint_y: None
+        height:40
+    Button:
+        text: "Exit"
+        size_hint_y: None
+        height: 100
+
+    Button: 
+        text: "Our terms of service"
+        size_hint_y: None
+        height: 100
+        on_release: 
+            app.root.current = "Terms"
+            root.manager.transition.direction = "up"
+    Label:
+        id: sp2
+
+<Terms>:
+    name: "Terms"
+    orientation: "vertical"
+    spacing: 10
+    spacex: self.size[0]/3
+    canvas.before:
+        Color:
+            rgba: (.80,.20,.20,60)
+        Rectangle:
+            size: self.size
+            pos:self.pos
+    Label:
+        height: 20
+        text: "AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
+    Button: 
+        text: "Back"
+        on_release: 
+            app.root.current = "LoginSignin"
+            root.manager.transition.direction = "down"
