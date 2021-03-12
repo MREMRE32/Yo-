@@ -8,12 +8,11 @@ from kivy.lang import Builder
 #from kivy.uix.textinput import TextInput
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
+from account import Account
 import pickle
 
-Accounts = [] #list of accounts with information
-
-pickle_in = open("accounts.pickle", "rb")
-Accounts = pickle.load(pickle_in)
+# kivy_venv\Scripts\activate
+savefile = "accounts.pickle"
 
 class Menu(BoxLayout, Screen): #HI THERE
     def btn(self):
@@ -29,9 +28,15 @@ class Sign(FloatLayout):
         pass1 = self.ids.pass1
         pass2 = self.ids.pass2
         pass1.hint_text = "yo"
+    	
+
         if(email.text != "" and uname.text != "" and pass1.text != "" and pass2.text != "" and pass2.text == pass1.text):
-            Accounts.append([email.text, uname.text, pass1.text])
-            create_popup()
+            newacc = Account(email.text,uname.text,pass1.text)
+            if (newacc.valid == True): # Class init checks if the email is valid.
+                create_popup()
+                newacc.localSave(savefile)
+            else:
+                not_success()
         else:
             not_success()
         # Need to validate information before creating the popup
@@ -40,9 +45,11 @@ class Log(FloatLayout):
     def verifyAccount(self):
         LogUser = self.ids.LogUser
         LogPass = self.ids.LogPass
-        for row in Accounts:
-            if row[1] == LogUser.text and row[2] == LogPass.text:
-                log_success()
+        logacc = Account.getSave(savefile)
+        print("Username: "+LogUser.text)
+        print("Password: "+LogPass.text)
+        if (logacc.username == LogUser.text and logacc.password == LogPass.text):
+            log_success()
 
 class P3(FloatLayout):
     pass
@@ -87,9 +94,3 @@ class Opening(App):
 if __name__ == "__main__":
     sa = Opening()
     sa.run()
-
-#Accounts.clear() #for testing purposes
-print(Accounts)
-pickle_out = open("accounts.pickle","wb")
-pickle.dump(Accounts, pickle_out)
-pickle_out.close()
