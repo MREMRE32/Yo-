@@ -11,6 +11,9 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from account import Account
 import pickle
 
+from kivy.uix.label import Label
+from kivy.uix.scrollview import ScrollView
+
 # kivy_venv\Scripts\activate
 savefile = "accounts.pickle"
 

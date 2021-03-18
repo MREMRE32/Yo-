@@ -1,3 +1,30 @@
+<SmoothButton@Button>:
+    background_color: (0,0,0,0)
+    background_normal: ''
+    back_color: (1,0,1,1)
+    border_radius: [18]
+    canvas.before:
+        Color:
+            rgba: self.back_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: self.border_radius
+
+<StrokeButton@Button>:
+    background_color: (0,0,0,0)
+    background_normal: ''
+    back_color: (1,0,1,1)
+    border_radius: 18
+    color: self.back_color
+    bold: True
+    canvas.before:
+        Color:
+            rgba: self.back_color
+        Line:
+            rounded_rectangle: (self.pos[0], self.pos[1], self.size[0],self.size[1],self.border_radius)
+            width: 1.2
+
 <Manager>:
     Menu:
     Terms:
@@ -131,25 +158,27 @@
         spacing: 10
         size_hint_y: None
         height: 80
-        Button:
+        StrokeButton:
             text: "Sign Up"
             multiline: False
             on_release: root.btn2()
-        Button:
+        SmoothButton:
             id: log_in
             text: "Log In"
             multiline: False
             on_release: root.btn()
+            border_radius: [18,2,18,2]
     Label:
         id: sp
         size_hint_y: None
         height:40
-    Button:
+    StrokeButton:
         text: "Exit"
         size_hint_y: None
         height: 100
+        
 
-    Button: 
+    StrokeButton: 
         text: "Our terms of service"
         size_hint_y: None
         height: 100
@@ -170,9 +199,34 @@
         Rectangle:
             size: self.size
             pos:self.pos
-    Label:
-        height: 20
-        text: "AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
+    
+    ScrollView:
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: 10
+            size_hint_y: None
+            height: self.minimum_height
+            Label:
+                text: 'yooooooooooooooooooooooooooooooooooooooo' + 'oooooooooooooooooooooo' * 90
+                font_size:30
+                size_hint_x: 1.0
+                size_hint_y: None
+                text_size: self.width,None
+                height: self.texture_size[1]
+            Button: 
+                text: "example"
+                text: "Back"
+                hight: 30
+                on_release: 
+                    app.root.current = "LoginSignin"
+                    root.manager.transition.direction = "down"
+            Label:
+                id: sp
+                size_hint_y: None
+                height:40
+
+                
+
     Button: 
         text: "Back"
         on_release: 
